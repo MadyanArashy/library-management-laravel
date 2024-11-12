@@ -66,7 +66,8 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        //
+        $book->update($request->all());
+        return redirect(route("books.edit", $book->id))->with("success","Buku telah berhasil di update!");
     }
 
     /**
