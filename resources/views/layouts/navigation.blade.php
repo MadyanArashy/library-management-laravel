@@ -88,6 +88,7 @@
             </x-nav-link>
         </li>
         @endif
+        @auth
         <li class="flex flex-col"> {{-- Profile Button --}}
         <x-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
             <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white {{ request()->routeIs('profile.edit') ? 'text-gray-900 dark:text-white' : '' }}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -96,6 +97,7 @@
             <span class="ms-3">{{ (Auth::user()->name ?? false) ? Auth::user()->name : 'Masuk ke dalam akunmu!' }}</span>
         </x-nav-link>
         </li>
+        @endauth
         <li>
             <div x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }" x-init="
             if (darkMode) document.documentElement.classList.add('dark');

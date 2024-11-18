@@ -4,7 +4,7 @@
         <h1 class=""></h1>
         <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
             <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                Edit Buku {{__($book->judul_buku)}}
+                Edit Buku {{__($book->judul_buku)}} (ID: {{ __($book->id) }})
             </h3>
         </div>
         <form action="{{ route('books.update', $book) }}" method="POST">
