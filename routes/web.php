@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
@@ -19,5 +20,6 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('books', BookController::class)->middleware('auth');
+Route::resource('users', UserController::class)->middleware('auth');
 
 require __DIR__.'/auth.php';
