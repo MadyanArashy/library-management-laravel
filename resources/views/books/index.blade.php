@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-table>
+    <x-table :route="'books.store'" :createModal="'books.partials.create'">
         <x-slot name="heading">
             Daftar Buku
         </x-slot>

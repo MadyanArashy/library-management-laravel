@@ -68,7 +68,7 @@
                     </x-nav-link>
                 </li>
                 <li>
-                    <x-nav-link :href="route('index')" :active="request()->routeIs('index')" class="ms-6">
+                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')" class="ms-6">
                         {{__('Anggota')}}
                     </x-nav-link>
                 </li>
