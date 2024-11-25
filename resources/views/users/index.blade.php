@@ -9,15 +9,17 @@
             <th class="px-1 border-2 border-gray-300 dark:border-gray-500">Email</th>
         </x-slot>
         <x-slot name="tbody">
-            <tr>
                 @foreach ($users as $user)
-                <tr>
-                    <td class="px-1 border-2 border-gray-300 dark:border-gray-500">{{ $loop->iteration}}</td>
-                    <td class="px-1 border-2 border-gray-300 dark:border-gray-500">{{ $user->name }}</td>
-                    <td class="px-1 border-2 border-gray-300 dark:border-gray-500">{{ $user->email }}</td>
+                <tr class="
+                @if ($loop->iteration % 2 == 0)
+                    bg-gray-200 dark:bg-gray-700
+                @endif
+                ">
+                    <td class="font-bold text-xl px-1 border-x-2 border-x-gray-300 dark:border-x-gray-500">{{ $loop->iteration}}</td>
+                    <td class="px-1 border-x-2 border-x-gray-300 dark:border-x-gray-500">{{ $user->name }}</td>
+                    <td class="px-1 border-x-2 border-x-gray-300 dark:border-x-gray-500">{{ $user->email }}</td>
                 </tr>
                 @endforeach
-            </tr>
         </x-slot>
     </x-table>
 </x-app-layout>

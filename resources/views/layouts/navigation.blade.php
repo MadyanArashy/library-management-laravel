@@ -46,9 +46,15 @@
                     </x-nav-link>
                 </li>
                 <li>
+                    @if(Auth::user()->role === 'admin')
                     <x-nav-link :href="route('books.index')" :active="request()->routeIs('books.index')" class="ms-6">
                         {{__('Lemari Buku')}}
                     </x-nav-link>
+                    @else
+                    <x-nav-link :href="route('anggota.index')" :active="request()->routeIs('anggota.index')" class="ms-6">
+                        {{__('Anggota Buku')}}
+                    </x-nav-link>
+                    @endif
                 </li>
                 <li>
                     <x-nav-link :href="route('index')" :active="request()->routeIs('index')" class="ms-6">Informasi</x-nav-link>

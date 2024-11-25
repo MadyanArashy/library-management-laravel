@@ -14,13 +14,14 @@ class RoleMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, $role): Response
-    {
-        if (Auth::check() && Auth::user()->hasRole($role)) {
-        return $next($request);
-        }
-        else {
-            abort(403,"Ambatron");
-        }
+    public function handle(Request $request, Closure $next, ...$roles): Response
+{
+    if (!in_array($request->user()->role, $roles)) {
+        // Handle unauthorized access
+        return redirect(route("home"))->with("error","Anda tidak memiliki akses untuk halaman ini!");
     }
+
+    return $next($request);
+}
+
 }
