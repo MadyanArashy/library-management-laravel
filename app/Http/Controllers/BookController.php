@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\PinjamBuku;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
 
 class BookController extends Controller
 {
@@ -62,6 +64,13 @@ class BookController extends Controller
         //
     }
 
+    public function history(): View
+    {
+        $pinjamBukus = PinjamBuku::all();
+        $books = Book::all();
+
+        return view("books.history", compact('pinjamBukus', 'books'));
+    }
     /**
      * Show the form for editing the specified resource.
      */

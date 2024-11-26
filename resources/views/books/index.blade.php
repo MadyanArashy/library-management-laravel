@@ -1,19 +1,24 @@
+<!-- Halaman daftar-daftar buku -->
 <x-app-layout>
     <x-table :route="'books.store'" :createModal="'books.partials.create'">
         <x-slot name="heading">
             Daftar Buku
         </x-slot>
+        {{-- Slot untuk thead --}}
         <x-slot name="thead">
-            <th class="px-1 border-2 border-gray-300 dark:border-gray-500">No</th>
-            <th class="px-1 border-2 border-gray-300 dark:border-gray-500">Judul Buku</th>
-            <th class="px-1 border-2 border-gray-300 dark:border-gray-500">Penulis</th>
-            <th class="px-1 border-2 border-gray-300 dark:border-gray-500">Kategori</th>
-            <th class="px-1 border-2 border-gray-300 dark:border-gray-500">Tahun Terbit</th>
-            <th class="px-1 border-2 border-gray-300 dark:border-gray-500">Jumlah Stok</th>
-            <th class="px-1 border-2 border-gray-300 dark:border-gray-500">Status</th>
-            <th class="px-1 border-2 border-gray-300 dark:border-gray-500">Deskripsi</th>
-            <th class="border-2 border-gray-300 dark:border-gray-500"></th>
+            <tr>
+                <th class="px-1 border-2 border-gray-300 dark:border-gray-500">No</th>
+                <th class="px-1 border-2 border-gray-300 dark:border-gray-500">Judul Buku</th>
+                <th class="px-1 border-2 border-gray-300 dark:border-gray-500">Penulis</th>
+                <th class="px-1 border-2 border-gray-300 dark:border-gray-500">Kategori</th>
+                <th class="px-1 border-2 border-gray-300 dark:border-gray-500">Tahun Terbit</th>
+                <th class="px-1 border-2 border-gray-300 dark:border-gray-500">Jumlah Stok</th>
+                <th class="px-1 border-2 border-gray-300 dark:border-gray-500">Status</th>
+                <th class="px-1 border-2 border-gray-300 dark:border-gray-500">Deskripsi</th>
+                <th class="border-2 border-gray-300 dark:border-gray-500"></th>
+            </tr>
         </x-slot>
+        {{-- Slot untuk tbody --}}
         <x-slot name="tbody">
             @foreach ($books as $book)
                 <tr class="

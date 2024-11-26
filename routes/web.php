@@ -5,13 +5,15 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\ProfileController;
+use App\Models\PinjamBuku;
 
 Route::get('/', function () {
     return view('welcome');
 })->name('index');
 
 Route::get('/home', function () {
-    return view('dashboard');
+    $pinjamCount = count(PinjamBuku::all());
+    return view('dashboard', compact('pinjamCount'));
 })->middleware(['auth', 'verified'])->name('home');
 
 Route::middleware('auth')->group(function () {
@@ -21,11 +23,13 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('history', [BookController::class,'history'])->name('books.history');
     Route::resource('books', BookController::class);
     Route::resource('users', UserController::class);
 });
 
 Route::middleware(['auth', 'role:anggota'])->group(function () {
+    Route::get('anggota/history', [AnggotaController::class,'history'])->name('anggota.history');
     Route::resource('anggota', AnggotaController::class);
 });
 require __DIR__.'/auth.php';

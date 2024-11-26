@@ -49,8 +49,8 @@
                             </x-nav-link>
                         </li>
                         <li>
-                            <x-nav-link :href="route('books.create')" :active="request()->routeIs('books.create')" class="ms-6">
-                                {{__('Tambah Buku')}}
+                            <x-nav-link :href="route('books.history')" :active="request()->routeIs('books.history')" class="ms-6">
+                                {{__('Riwayat Pinjam')}}
                             </x-nav-link>
                         </li>
                         <li>
@@ -100,8 +100,8 @@
                             </x-nav-link>
                         </li>
                         <li>
-                            <x-nav-link :href="route('anggota.create')" :active="request()->routeIs('anggota.create')" class="ms-6">
-                                {{__('Tambah Buku')}}
+                            <x-nav-link :href="route('anggota.history')" :active="request()->routeIs('anggota.show')" class="ms-6">
+                                {{__('Riwayat Pinjam')}}
                             </x-nav-link>
                         </li>
                         <li>

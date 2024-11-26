@@ -32,7 +32,7 @@
                             </svg>
                         </span>
                         <span class="text-6xl">
-                            73
+                            {{ $pinjamCount }}
                         </span>
                     </div>
                     <p class="text-center">Buku Dipinjam</p>
@@ -46,7 +46,7 @@
                             </svg>
                         </span>
                         <span class="text-6xl">
-                            24
+                            {{ $pinjamCount }}
                         </span>
                     </div>
                     <p class="text-center">Sedang Dipinjam</p>

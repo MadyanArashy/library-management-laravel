@@ -26,6 +26,13 @@ class AnggotaController extends Controller
         abort(404);;
     }
 
+    public function history()
+    {
+        $pinjamBukus = PinjamBuku::all();
+        $books = Book::all();
+        return view("anggota.history", compact("pinjamBukus", "books"));
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -36,8 +43,6 @@ class AnggotaController extends Controller
             "tanggal_pinjam"=> "required|date",
             "tanggal_kembali"=> "required|date|after_or_equal:tanggal_pinjam",
         ]);
-
-        dd($request->all());
 
         $book = Book::findOrFail($request->book_id);
         // Cek Ketersediaan Buku
@@ -65,7 +70,7 @@ class AnggotaController extends Controller
      */
     public function show(string $id)
     {
-        //
+
     }
 
     /**
