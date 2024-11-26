@@ -36,10 +36,20 @@ class BookController extends Controller
             "tahun_terbit" => "required|integer",
             "jumlah_stok" => "required|integer",
             "deskripsi" => "required|string",
-            "tersedia" => "required|boolean",
+            "status" => "required|boolean",
         ]);
 
-        Book::create($request->all());
+        // dd($request->all());
+
+        Book::create([
+            "judul_buku" => $request->judul_buku,
+            "penulis" => $request->penulis,
+            "kategori" => $request->kategori,
+            "tahun_terbit" => $request->tahun_terbit,
+            "jumlah_stok" => $request->jumlah_stok,
+            "deskripsi" => $request->deskripsi,
+            "status" => $request->status,
+        ]);
 
         return redirect(route('books.index'))->with("success","Buku berhasil ditambahkan!");
     }
@@ -58,7 +68,7 @@ class BookController extends Controller
     public function edit(string $id)
     {
         $book = Book::findOrFail($id);
-        return view ("books.edit", compact("book"));
+        return view ("books.partials.edit", compact("book"));
     }
 
     /**

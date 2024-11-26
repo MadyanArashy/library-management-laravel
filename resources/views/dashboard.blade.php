@@ -1,6 +1,6 @@
 <x-app-layout>
     <section class="bg-white dark:bg-gray-900">
-        <div class="lg:flex-col mx-autoinline-block justify-left px-8 py-6">
+        <div class="lg:flex-col justify-left px-8 py-6 max-w-screen-xl mx-auto">
             <div class="px-12 py-8 lg:flex lg:lg:flex-1 gap-7 items-center rounded-xl bg-gray-50 dark:bg-gray-950 shadow-lg shadow-gray-300 dark:shadow-gray-900">
                 <img src="images/library.png" alt="Logo" class='w-full max-w-sm'/>
                 <div class="flex flex-col max-w-screen-lg">
@@ -12,14 +12,14 @@
                     </div>
                 </div>
             </div>
-            <div class='mt-8'>
-                <h2 class='text-2xl font-extrabold dark:text-white'>Info Dashboard Buku</h2>
-                <div class="flex flex-col lg:flex-row justify-between text-gray-700 dark:text-gray-300">
-                    <p>Dashboard informasi buku total buku dipinjam, buku dikembalikan, buku rusak.</p>
-                    <button class='bg-gray-300 rounded-lg px-3 py-2 inline-block max-w-xs mx-auto lg:mx-0'>
-                        Kelola
-                    </button>
+            <div class='mt-8 flex items-center justify-between'>
+                <div>
+                    <h2 class='text-2xl font-extrabold dark:text-white'>Info Dashboard Buku</h2>
+                    <p class="text-gray-700 dark:text-gray-300">Dashboard informasi buku total buku dipinjam, buku dikembalikan, buku rusak.</p>
                 </div>
+                <button class='bg-gray-300 rounded-lg px-3 py-2 inline-block max-w-xs mx-auto lg:mx-0 h-1/2 hover:opacity-80 transition'>
+                    Kelola
+                </button>
             </div>
 
             <div class="mt-8 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

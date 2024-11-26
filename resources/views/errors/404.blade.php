@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>404</title>
-</head>
-<body>
-    <p>Jgn buka halaman ini atuh bro</p>
-    <a href="{{ route('home') }}">Balik</a>
-</body>
-</html>
+<x-app-layout>
+    <h1 class="text-6xl text-gray-900 dark:text-gray-100 absolute m-auto bottom-[60%] left-0 right-0 text-center">
+        404 gak ketemu ;(
+    </h1>
+    <p class="text-6xl text-gray-900 dark:text-gray-100 absolute m-auto bottom-1/2 left-0 right-0 text-center">maap ya</p>
+</x-app-layout>

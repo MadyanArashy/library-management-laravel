@@ -11,16 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('books', function (Blueprint $table) {
+        Schema::create("pinjam_bukus", function (Blueprint $table) {
             $table->id();
+            $table->foreignId("user_id")->constrained('users')->onDelete('cascade');
+            $table->foreignId("book_id")->constrained('books')->onDelete('cascade');
+            $table->date("tanggal_pinjam")->default(now());
+            $table->date("tanggal_kembali")->nullable();
+            $table->string("status")->default("borrowed");
             $table->timestamps();
-            $table->string('judul_buku');
-            $table->string('penulis');
-            $table->string('kategori');
-            $table->smallInteger('tahun_terbit');
-            $table->integer('jumlah_stok');
-            $table->boolean('status')->default(true);
-            $table->string('deskripsi')->default(0);
         });
     }
 
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('books');
+        //
     }
 };

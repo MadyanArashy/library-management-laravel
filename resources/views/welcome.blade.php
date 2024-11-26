@@ -1,29 +1,8 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Library Management</title>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-
-    <!-- Styles / Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-</head>
-
-<body class="font-sans antialiased dark:bg-gray-900 dark:text-white/50">
-
-<nav class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b">
+<x-app-layout>
+<x-slot name="header" class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b">
     <div class="flex flex-row justify-between items-center px-4 py-3 sm:px-6 lg:px-8">
         <div class="w-12"><x-application-logo></x-application-logo></div>
-        <div class="flex gap-4 items-center">
+        <div class="flex gap-4 items-center dark:text-white">
             <p>
                 {{ now()->format('l, d M Y | H:i') }}
             </p>
@@ -33,7 +12,7 @@
             </button>
         </div>
     </div>
-</nav>
+</x-slot >
 
 
 <section class="bg-white dark:bg-gray-900 flex justify-center items-center mt-12">
@@ -83,6 +62,4 @@
             </div>
         </div>
     </section>
-</body>
-
-</html>
+</x-app-layout>

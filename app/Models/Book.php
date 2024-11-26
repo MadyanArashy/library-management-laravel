@@ -13,6 +13,22 @@ class Book extends Model
         'tahun_terbit',
         'jumlah_stok',
         'status',
+        'loan_status',
         'deskripsi',
     ];
+
+    protected $casts = [
+        'status' => 'boolean',
+    ];
+
+    public function books()
+    {
+        return $this->hasMany(Book::class);
+    }
+
+    public function loans()
+    {
+        return $this->hasMany(PinjamBuku::class);
+    }
+
 }
