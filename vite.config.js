@@ -11,4 +11,20 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    server: {
+        cors: true,
+        host: '0.0.0.0',
+        port: 5173,
+        strictPort: true,
+        hmr: {
+            host: '202.100.16.33',
+            port: 5173,
+        },
+        proxy: {
+            '/api': {
+                target: 'http://202.100.16.33:8008',
+                changeOrigin: true,
+            }
+        }
+    }
 });

@@ -36,6 +36,9 @@ class AnggotaController extends Controller
             "tanggal_pinjam"=> "required|date",
             "tanggal_kembali"=> "required|date|after_or_equal:tanggal_pinjam",
         ]);
+
+        dd($request->all());
+
         $book = Book::findOrFail($request->book_id);
         // Cek Ketersediaan Buku
         if(!$book->status) {
