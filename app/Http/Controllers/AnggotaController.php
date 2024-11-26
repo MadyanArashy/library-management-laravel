@@ -84,9 +84,26 @@ class AnggotaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(string $status, string $id, string $book_id)
     {
-        //
+        if($status == 'borrowed')
+        {
+            $book_status = 'borrowed';
+            $pinjam_status = 'returned';
+        } elseif($status == 'returned') {
+            $book_status = 'available';
+            $pinjam_status = 'borrowed';
+        }
+
+        $pinjamBuku = PinjamBuku::findOrFail($id);
+        $book = Book::findOrFail($book_id);
+
+        $book->update([
+            'status'=> $status,
+        ]);
+        $pinjamBuku->update([
+            'status'=> $status,
+        ])
     }
 
     /**
