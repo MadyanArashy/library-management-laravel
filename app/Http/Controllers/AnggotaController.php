@@ -103,7 +103,7 @@ class AnggotaController extends Controller
         ]);
         $pinjamBuku->update([
             'status'=> $status,
-        ])
+        ]);
     }
 
     /**
