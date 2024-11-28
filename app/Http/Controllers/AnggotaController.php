@@ -84,26 +84,38 @@ class AnggotaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(string $status, string $id, string $book_id)
+    public function update(Request $request, string $id)
+    {
+       //
+    }
+
+    /*
+    *   Ubah status buku dan pinjamBuku
+    */
+    public function status(string $status, string $id, string $book_id)
     {
         if($status == 'borrowed')
         {
-            $book_status = 'borrowed';
+            $book_status = true;
             $pinjam_status = 'returned';
         } elseif($status == 'returned') {
-            $book_status = 'available';
+            $book_status = false;
             $pinjam_status = 'borrowed';
-        }
+        } else{
+            dd($status, $id, $book_id);
+        };
 
         $pinjamBuku = PinjamBuku::findOrFail($id);
         $book = Book::findOrFail($book_id);
 
         $book->update([
-            'status'=> $status,
+            'status'=> $book_status,
         ]);
         $pinjamBuku->update([
-            'status'=> $status,
+            'status'=> $pinjam_status,
         ]);
+
+        return redirect()->route('books.history')->with('success','Buku telah dikembalikan');
     }
 
     /**

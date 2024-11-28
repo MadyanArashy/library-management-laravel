@@ -24,6 +24,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('history', [BookController::class,'history'])->name('books.history');
+    Route::patch('anggota/{status}/{id}/{book_id}', [AnggotaController::class,'status'])->name('anggota.status');
     Route::resource('books', BookController::class);
     Route::resource('users', UserController::class);
 });

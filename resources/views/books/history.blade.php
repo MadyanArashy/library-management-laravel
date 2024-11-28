@@ -26,7 +26,7 @@
                     <td class="px-1 border-x-2 border-x-gray-300 dark:border-x-gray-500">{{ $pinjam->tanggal_pinjam }}</td>
                     <td class="px-1 border-x-2 border-x-gray-300 dark:border-x-gray-500">{{ $pinjam->tanggal_kembali }}</td>
                     <td class="px-1 border-x-2 border-x-gray-300 dark:border-x-gray-500 text-white">
-                        <form action="{{ route('anggota.update', $pinjam->status, $pinjam->id, $pinjam->book->id) }}" method="post">
+                        <form action="{{ route('anggota.status', ['status' => $pinjam->status, 'id' => $pinjam->id, 'book_id' => $pinjam->book->id]) }}" method="post">
                             @csrf
                             @method("PATCH")
                             <button type="submit" class="{{ ($pinjam->status === 'borrowed' ? 'bg-yellow-500' : 'bg-green-500') }} px-2 py-1.5 rounded-3xl text-center inline-block">{{ $pinjam->status }}</button>

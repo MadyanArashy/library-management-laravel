@@ -17,12 +17,12 @@ export default defineConfig({
         port: 5173,
         strictPort: true,
         hmr: {
-            host: '202.100.16.33',
+            host: '192.168.1.17',
             port: 5173,
         },
         proxy: {
             '/api': {
-                target: 'http://202.100.16.33:8008',
+                target: 'http://192.168.1.17:8008',
                 changeOrigin: true,
             }
         }

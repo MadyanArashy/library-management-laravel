@@ -7,8 +7,8 @@
                     <h1 class='text-3xl font-bold dark:text-white'>Selamat pagi, {{ Auth::user()->name }}</h1>
                     <h3 class='text-gray-700 dark:text-gray-300 mb-3'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis nam dolor praesentium dicta velit ipsum culpa cumque molestias illum odio, voluptas provident error quod debitis rem aut, ducimus vitae veniam? Lorem ipsum dolor sit amet consectetur adipisicing elit.</h3>
                     <div class="flex gap-16 mt-3">
-                        <a href={{ route('profile.destroy') }} class='px-4 py-2 bg-gray-200 dark:text-black rounded-md lg:rounded-full text-nowrap'>Baca Buku</a>
-                        <a href={{ route('profile.destroy') }} class='px-4 py-2 bg-[#A78E51] text-white rounded-md lg:rounded-full text-nowrap'>Pinjam Buku</a>
+                        <a href={{ Auth::user()->role === 'admin' ? route('books.index') : route('anggota.index') }} class='px-4 py-2 bg-gray-200 dark:text-black rounded-full text-nowrap'>Baca Buku</a>
+                        <a href={{ Auth::user()->role === 'admin' ? route('books.index') : route('anggota.index') }} class='px-4 py-2 bg-[#A78E51] text-white rounded-full text-nowrap'>Pinjam Buku</a>
                     </div>
                 </div>
             </div>
@@ -17,12 +17,12 @@
                     <h2 class='text-2xl font-extrabold dark:text-white'>Info Dashboard Buku</h2>
                     <p class="text-gray-700 dark:text-gray-300">Dashboard informasi buku total buku dipinjam, buku dikembalikan, buku rusak.</p>
                 </div>
-                <button class='bg-gray-300 rounded-lg px-3 py-2 inline-block max-w-xs mx-auto lg:mx-0 h-1/2 hover:opacity-80 transition'>
+                <button class='bg-gray-300 rounded-lg px-3 py-2 inline-block max-w-xs mx-auto lg:mx-0 h-1/2 hover:opacity-80 transition ml-auto'>
                     Kelola
                 </button>
             </div>
 
-            <div class="mt-8 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <div class="mt-8 sm:grid flex flex-col mx-auto items-center align-middle content-center gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 
                 <div class="card flex-col justify-between items-center inline-block bg-[#6E987C] px-6 py-3 text-white w-56 h-56 rounded-xl">
                     <div class="flex flex-row items-center justify-between mb-16 w-full">
