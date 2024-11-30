@@ -8,6 +8,7 @@
         <x-slot name="thead">
             <tr>
                 <th class="px-1 border-2 border-gray-300 dark:border-gray-500">No</th>
+                <th class="px-1 border-2 border-gray-300 dark:border-gray-500">Foto Cover</th>
                 <th class="px-1 border-2 border-gray-300 dark:border-gray-500">Judul Buku</th>
                 <th class="px-1 border-2 border-gray-300 dark:border-gray-500">Penulis</th>
                 <th class="px-1 border-2 border-gray-300 dark:border-gray-500">Kategori</th>
@@ -27,6 +28,7 @@
                 @endif
                 ">
                     <td class="font-bold text-xl px-1 border-x-2 border-x-gray-300 dark:border-x-gray-500">{{ $loop->iteration }}</td>
+                    <td class="px-1 border-x-2 border-x-gray-300 dark:border-x-gray-500 py-1"><img class="w-40 max-h-40 object-cover" src="{{ 'storage/'.$book->foto }}" alt="{{ $book->judul_buku }}"></td>
                     <td class="px-1 border-x-2 border-x-gray-300 dark:border-x-gray-500">{{ $book->judul_buku }}</td>
                     <td class="px-1 border-x-2 border-x-gray-300 dark:border-x-gray-500">{{ $book->penulis }}</td>
                     <td class="px-1 border-x-2 border-x-gray-300 dark:border-x-gray-500">{{ $book->kategori }}</td>

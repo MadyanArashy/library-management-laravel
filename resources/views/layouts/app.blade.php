@@ -10,6 +10,7 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link rel="shortcut icon" href="{{ asset('images/Laravel.ico') }}" type="image/x-icon">
 
         <!-- Icons -->
         <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-straight/css/uicons-solid-straight.css'>
@@ -20,7 +21,7 @@
     <body class="font-sans antialiased">
 
 
-{{-- @if(Session('error'))
+@if(Session('error'))
 <div id="error-toast" class="flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 fixed z-50 top-4 right-8 toast" role="alert">
     <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-white bg-red-500 rounded-full">
         <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512" height="512">
@@ -53,7 +54,7 @@
         </svg>
     </button>
 </div>
-@endif --}}
+@endif
 
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
             @include('layouts.navigation')
@@ -64,7 +65,7 @@
             @endisset
 
             <!-- Page Content -->
-            <main>
+            <main class="2xl:pl-64 overflow-x-hidden">
                 {{ $slot }}
             </main>
         </div>

@@ -6,6 +6,8 @@ use App\Models\Book;
 use App\Models\PinjamBuku;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class BookController extends Controller
 {
@@ -39,9 +41,12 @@ class BookController extends Controller
             "jumlah_stok" => "required|integer",
             "deskripsi" => "required|string",
             "status" => "required|boolean",
+            "foto"=> "image|mimes:jpeg,jpg,png,svg,webp|max:2048",
         ]);
 
         // dd($request->all());
+        $image = $request->file('foto')->store('books', 'public');
+
 
         Book::create([
             "judul_buku" => $request->judul_buku,
@@ -51,6 +56,7 @@ class BookController extends Controller
             "jumlah_stok" => $request->jumlah_stok,
             "deskripsi" => $request->deskripsi,
             "status" => $request->status,
+            "foto"=> $image,
         ]);
 
         return redirect(route('books.index'))->with("success","Buku berhasil ditambahkan!");
@@ -61,7 +67,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+        return back();
     }
 
     public function history(): View

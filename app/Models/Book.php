@@ -15,6 +15,7 @@ class Book extends Model
         'status',
         'loan_status',
         'deskripsi',
+        'foto',
     ];
 
     protected $casts = [

@@ -13,7 +13,9 @@ Route::get('/', function () {
 
 Route::get('/home', function () {
     $pinjamCount = count(PinjamBuku::all());
-    return view('dashboard', compact('pinjamCount'));
+    $borrowedPinjamCount = count(PinjamBuku::where('status', 'borrowed')->get());
+    $returnedPinjamCount = count(PinjamBuku::where('status', 'returned')->get());
+    return view('dashboard', compact('pinjamCount', 'borrowedPinjamCount', 'returnedPinjamCount'));
 })->middleware(['auth', 'verified'])->name('home');
 
 Route::middleware('auth')->group(function () {

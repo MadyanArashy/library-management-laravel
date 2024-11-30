@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('jumlah_stok');
             $table->boolean('status')->default(true);
             $table->string('deskripsi')->default(0);
+            $table->string('foto')->nullable();
         });
     }
 

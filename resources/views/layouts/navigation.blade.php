@@ -1,5 +1,5 @@
 
-<button class="top-2 left-2 bg-gray-200 bg-opacity-40 hover:bg-opacity-80 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-1.5 py-1.5 dark:white-700 focus:outline-none fixed z-30 transform transition-transform active:rotate-90" type="button" data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation" aria-controls="drawer-navigation">
+<button class="2xl:hidden top-2 left-2 bg-gray-200 bg-opacity-40 hover:bg-opacity-80 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-1.5 py-1.5 dark:white-700 focus:outline-none fixed z-30 transform transition-transform active:rotate-90" type="button" data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation" aria-controls="drawer-navigation">
     <svg viewBox="0 0 100 80" width="40" height="40">
         <rect width="100" height="20" rx="8"></rect>
         <rect y="30" width="100" height="20" rx="8"></rect>
@@ -8,11 +8,14 @@
 </button>
 
 <!-- drawer component -->
-<aside id="drawer-navigation" class="fixed top-0 left-0 z-40 w-64 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white dark:bg-gray-800 border-r-4 border-r-[rgba(220,220,255,0.25)]" tabindex="-1" aria-labelledby="drawer-navigation-label">
-    <button type="button" data-drawer-hide="drawer-navigation" aria-controls="drawer-navigation" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 end-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" >
-        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+<aside id="drawer-navigation" class="fixed top-0 left-0 z-40 w-64 h-screen p-4 overflow-y-auto bg-white dark:bg-gray-800 border-r-4 border-r-[rgba(220,220,255,0.25)] transform transition-transform 2xl:transition-none 2xl:translate-x-0 -translate-x-full" tabindex="-1" aria-labelledby="drawer-navigation-label">
+    <button type="button" data-drawer-hide="drawer-navigation" aria-controls="drawer-navigation" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white 2xl:hidden">
+        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+        </svg>
         <span class="sr-only">Close menu</span>
     </button>
+
     <div class="w-5/6 pr-4">
     <a href="{{ route('index') }}">
         <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
@@ -34,7 +37,7 @@
             @if(Auth::user()->role === 'admin')
                 <li> {{-- Dropdown Lemari --}}
                     <button type="button" class="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-lemari" data-collapse-toggle="dropdown-lemari">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white {{ request()->routeIs('home') ? 'text-gray-900 dark:text-white' : '' }}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white {{ request()->routeIs('books.index') || request()->routeIs('books.history') ? 'text-gray-900 dark:text-white' : '' }}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 9h6m-6 3h6m-6 3h6M6.996 9h.01m-.01 3h.01m-.01 3h.01M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/>
                         </svg>
                         <span class="flex-1 ml-3 text-left whitespace-nowrap">Lemari</span>
@@ -42,7 +45,8 @@
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                         </svg>
                     </button>
-                    <ul id="dropdown-lemari" class="hidden py-2 space-y-2">
+
+                    <ul id="dropdown-lemari" class="{{ request()->routeIs('books.index') || request()->routeIs('books.history') ? '' : 'hidden' }} py-2 space-y-2">
                         <li>
                             <x-nav-link :href="route('books.index')" :active="request()->routeIs('books.index')" class="ms-6">
                                 {{__('Lemari Buku')}}
@@ -52,9 +56,6 @@
                             <x-nav-link :href="route('books.history')" :active="request()->routeIs('books.history')" class="ms-6">
                                 {{__('Riwayat Pinjam')}}
                             </x-nav-link>
-                        </li>
-                        <li>
-                            <x-nav-link :href="route('index')" :active="request()->routeIs('index')" class="ms-6">Informasi</x-nav-link>
                         </li>
                     </ul>
                 </li>
@@ -75,11 +76,11 @@
                                 {{__('Anggota')}}
                             </x-nav-link>
                         </li>
-                        <li>
+                        {{-- <li>
                             <x-nav-link :href="route('index')" :active="request()->routeIs('index')" class="ms-6">
                                 {{__('Informasi')}}
                             </x-nav-link>
-                        </li>
+                        </li> --}}
                     </ul>
                 </li>
             @else
@@ -93,14 +94,14 @@
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                         </svg>
                     </button>
-                    <ul id="dropdown-lemari" class="hidden py-2 space-y-2">
+                    <ul id="dropdown-lemari" class="{{ request()->routeIs('anggota.index') || request()->routeIs('anggota.history') ? '' : 'hidden' }} py-2 space-y-2">
                         <li>
                             <x-nav-link :href="route('anggota.index')" :active="request()->routeIs('anggota.index')" class="ms-6">
                                 {{__('Lemari Buku')}}
                             </x-nav-link>
                         </li>
                         <li>
-                            <x-nav-link :href="route('anggota.history')" :active="request()->routeIs('anggota.show')" class="ms-6">
+                            <x-nav-link :href="route('anggota.history')" :active="request()->routeIs('anggota.history')" class="ms-6">
                                 {{__('Riwayat Pinjam')}}
                             </x-nav-link>
                         </li>

@@ -70,7 +70,7 @@ class AnggotaController extends Controller
      */
     public function show(string $id)
     {
-
+        return back();
     }
 
     /**
@@ -78,7 +78,7 @@ class AnggotaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return back();
     }
 
     /**
