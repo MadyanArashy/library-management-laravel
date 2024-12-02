@@ -47,7 +47,6 @@ class BookController extends Controller
         // dd($request->all());
         $image = $request->file('foto')->store('books', 'public');
 
-
         Book::create([
             "judul_buku" => $request->judul_buku,
             "penulis" => $request->penulis,
