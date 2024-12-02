@@ -7,11 +7,11 @@
                 <button data-modal-target="{{ $book->id }}-modal" data-modal-toggle="{{ $book->id }}-modal" type="button" class=" text-left block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 transition duration-100">
                     <img class="h-28 object-cover mx-auto" src="{{ asset('storage/'.$book->foto) }}" alt="{{ $book->judul_buku.' Cover' }}">
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white capitalize truncate">{{ $book->judul_buku }}</h5>
-                    <span class="font-normal text-gray-100 px-2 py-1 rounded-full {{ $book->status ? 'bg-green-500' : 'bg-red-500' }} capitalize">{{ $book->status ? 'Tersedia' : 'Habis' }}</span>
+                    <span class="font-normal text-gray-100 px-2 py-1 rounded-full {{ $book->status ? 'bg-green-500' : 'bg-red-500' }} capitalize">{{ $book->book_status }}</span>
                     <p class="font-normal text-gray-700 dark:text-gray-400 capitalize truncate">Penulis: {{ $book->penulis }}</p>
                     <p class="font-normal text-gray-700 dark:text-gray-400">Kategori: {{ $book->kategori }}</p>
                     <p class="font-normal text-gray-700 dark:text-gray-400">Tahun Terbit: {{ $book->tahun_terbit }}</p>
-                    <p class="font-normal text-gray-700 dark:text-gray-400">Jumlah Stok: {{ $book->jumlah_stok }}</p>
+                    <p class="font-normal text-gray-700 dark:text-gray-400">Jumlah Stok: <span class="font-bold underline">{{ $book->jumlah_stok }}</span></p>
                 </button>
 
                 <!-- Main modal -->
@@ -50,6 +50,7 @@
                                     <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">{{ $book->jumlah_stok }}</dd>
                                 </dl>
                                 <div class="flex justify-between items-end">
+                                    @if($book->status)
                                         <form class="flex flex-col sm:flex-row justify-between sm:items-end w-full" action="{{ route('anggota.store') }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             <input type="hidden" name="book_id" value="{{ $book->id }}">
@@ -72,6 +73,11 @@
                                                 Pinjam
                                             </button>
                                         </form>
+                                        @else
+                                        <p class="text-center dark:text-white">
+                                            Buku ini tidak tersedia!
+                                        </p>
+                                    @endif
                                 </div>
                         </div>
                     </div>

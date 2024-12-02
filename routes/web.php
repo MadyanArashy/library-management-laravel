@@ -22,17 +22,19 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::patch('anggota/{status}/{id}/{book_id}', [AnggotaController::class,'status'])->name('anggota.status');
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('history', [BookController::class,'history'])->name('books.history');
-    Route::patch('anggota/{status}/{id}/{book_id}', [AnggotaController::class,'status'])->name('anggota.status');
+
     Route::resource('books', BookController::class);
     Route::resource('users', UserController::class);
 });
 
 Route::middleware(['auth', 'role:anggota'])->group(function () {
     Route::get('anggota/history', [AnggotaController::class,'history'])->name('anggota.history');
-    Route::resource('anggota', AnggotaController::class);
+    Route::get('anggota/borrowed', [AnggotaController::class,'borrowed'])->name('anggota.borrowed');
+    Route::resource('anggota', AnggotaController::class)->only('index', 'store');
 });
 require __DIR__.'/auth.php';

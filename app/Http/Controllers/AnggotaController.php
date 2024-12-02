@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\PinjamBuku;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 
 class AnggotaController extends Controller
 {
@@ -66,11 +67,12 @@ class AnggotaController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Menunjukkan semua buku yang sedang dipinjam pengguna
      */
-    public function show(string $id)
+    public function borrowed()
     {
-        return back();
+        $pinjamBukus = PinjamBuku::where('user_id', Auth::user()->id)->where('status', 'borrowed')->get();
+        return view('anggota.borrowed', compact('pinjamBukus'));
     }
 
     /**
@@ -94,14 +96,17 @@ class AnggotaController extends Controller
     */
     public function status(string $status, string $id, string $book_id)
     {
-        if($status == 'borrowed')
+        if(Auth::user()->role == 'admin') { $route = 'books.history'; }else{ $route = 'anggota.history';} // Jika pengguna admin, kirim ke books.history, Jika pengguna anggota, kirim ke anggota.history
+        if($status == 'borrowed') // Jika status "borrowed", berarti menjadi returned
         {
             $book_status = true;
+            $book_status_2 = 'available';
             $pinjam_status = 'returned';
-        } elseif($status == 'returned') {
+        } elseif($status == 'returned') { // Jika status "returned", berarti menjadi borrowed
             $book_status = false;
+            $book_status_2 = 'unavailable';
             $pinjam_status = 'borrowed';
-        } else{
+        } else{ // Jika ngebug maka dibatalin semua script dan di console log
             dd($status, $id, $book_id);
         };
 
@@ -110,6 +115,7 @@ class AnggotaController extends Controller
 
         $book->update([
             'status'=> $book_status,
+            'book_status' => $book_status_2,
         ]);
         $pinjamBuku->update([
             'status'=> $pinjam_status,

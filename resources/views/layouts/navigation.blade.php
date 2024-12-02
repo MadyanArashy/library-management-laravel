@@ -25,6 +25,8 @@
 
     <nav>
     <ul class="space-y-2 font-medium">
+        <!-- Hanya menunjukkan tombol-tombol jika user telah login,
+            selainnya menunjukkan tombol login menggunakan @guest @endguest directive -->
         @auth
             <li> {{-- Home Button --}}
                 <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
@@ -94,7 +96,7 @@
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                         </svg>
                     </button>
-                    <ul id="dropdown-lemari" class="{{ request()->routeIs('anggota.index') || request()->routeIs('anggota.history') ? '' : 'hidden' }} py-2 space-y-2">
+                    <ul id="dropdown-lemari" class="{{ request()->routeIs('anggota.index') || request()->routeIs('anggota.history') || request()->routeIs('anggota.borrowed') ? '' : 'hidden' }} py-2 space-y-2">
                         <li>
                             <x-nav-link :href="route('anggota.index')" :active="request()->routeIs('anggota.index')" class="ms-6">
                                 {{__('Lemari Buku')}}
@@ -106,19 +108,10 @@
                             </x-nav-link>
                         </li>
                         <li>
-                            <x-nav-link :href="route('index')" :active="request()->routeIs('index')" class="ms-6">Informasi</x-nav-link>
+                            <x-nav-link :href="route('anggota.borrowed')" :active="request()->routeIs('anggota.borrowed')" class="ms-6">Pinjaman</x-nav-link>
                         </li>
                     </ul>
                 </li>
-            @endif
-            @if(Auth::check() && Auth::user()->is_admin) <li> {{-- Admin Button --}}
-                <x-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.index' || 'admin.create')">
-                    <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white {{ request()->routeIs('admin.index') ? 'text-gray-900 dark:text-white' : '' }}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 7.205c4.418 0 8-1.165 8-2.602C20 3.165 16.418 2 12 2S4 3.165 4 4.603c0 1.437 3.582 2.602 8 2.602ZM12 22c4.963 0 8-1.686 8-2.603v-4.404c-.052.032-.112.06-.165.09a7.75 7.75 0 0 1-.745.387c-.193.088-.394.173-.6.253-.063.024-.124.05-.189.073a18.934 18.934 0 0 1-6.3.998c-2.135.027-4.26-.31-6.3-.998-.065-.024-.126-.05-.189-.073a10.143 10.143 0 0 1-.852-.373 7.75 7.75 0 0 1-.493-.267c-.053-.03-.113-.058-.165-.09v4.404C4 20.315 7.037 22 12 22Zm7.09-13.928a9.91 9.91 0 0 1-.6.253c-.063.025-.124.05-.189.074a18.935 18.935 0 0 1-6.3.998c-2.135.027-4.26-.31-6.3-.998-.065-.024-.126-.05-.189-.074a10.163 10.163 0 0 1-.852-.372 7.816 7.816 0 0 1-.493-.268c-.055-.03-.115-.058-.167-.09V12c0 .917 3.037 2.603 8 2.603s8-1.686 8-2.603V7.596c-.052.031-.112.059-.165.09a7.816 7.816 0 0 1-.745.386Z"/>
-                    </svg>
-                    <span class="ms-3">Halaman Admin</span>
-                </x-nav-link>
-            </li>
             @endif
             <li class="flex flex-col"> {{-- Profile Button --}}
                 <x-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
@@ -134,21 +127,6 @@
                 <x-nav-link :href="route('login')">Masuk ke dalam akunmu!</x-nav-link>
             </li>
         @endguest
-        <li>
-            <div x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }" x-init="
-            if (darkMode) document.documentElement.classList.add('dark');
-            else document.documentElement.classList.remove('dark');
-            ">
-            <x-secondary-button class="ms-3" @click="
-            darkMode = !darkMode;
-            localStorage.setItem('darkMode', darkMode);
-            if (darkMode) document.documentElement.classList.add('dark');
-            else document.documentElement.classList.remove('dark');
-            ">
-            Dark Mode
-        </x-secondary-button>
-            </div>
-        </li>
         <hr>
         @auth
         <li class="flex flex-col"> {{-- Logout Button --}}
