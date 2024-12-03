@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://laravel.com" target="_blank">
-    <img src="https://raw.githubusercontent.com/MadyanArashy/library-management-laravel/master/public/images/library.png" width="400" alt="Library Logo">
+    <img src="public/images/library.png" width="400" alt="Library Logo">
   </a>
 </p>
 
