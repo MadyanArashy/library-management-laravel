@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://laravel.com" target="_blank">
+  <a href="https://dev-academy.org" target="_blank">
     <img src="public/images/library.png" width="400" alt="Library Logo">
   </a>
 </p>
