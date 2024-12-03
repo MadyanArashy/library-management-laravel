@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-table :route="'users.store'" :createModal="'users.partials.create'">
+    <x-table :route="'users.store'" :createModal="'users.partials.create'" :queryRoute="'users.index'">
         <x-slot name="heading">
             Tabel Pengguna
         </x-slot>
