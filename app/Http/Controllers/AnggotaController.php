@@ -14,10 +14,21 @@ class AnggotaController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $books = Book::all();
-        return view("anggota.index", compact("books"));
+{
+    // Get all books by default
+    $books = Book::all();
+
+    // Check if the search query exists
+    if (request()->has('q') && request()->q) {
+        $query = request()->q;
+
+        // Filter books where the title matches the query (use 'like' for partial matching)
+        $books = Book::where('judul_buku', 'like', "%$query%")->get();
     }
+
+    return view("anggota.index", compact("books"));
+}
+
 
     /**
      * Show the form for creating a new resource.
@@ -56,12 +67,12 @@ class AnggotaController extends Controller
             "tanggal_pinjam"=> $request->tanggal_pinjam,
             "tanggal_kembali"=> $request->tanggal_kembali,
             "status"=> "borrowed",
-            ]);
+        ]);
 
         // Set status buku
         $book->update([
             'status' => false, // Buku tidak tersedia
-            'book_status' => 'borrowed', // Buku sedang dipinjam
+            'book_status' => 'unavailable', // Buku sedang dipinjam
         ]);
         return back()->with('success','Buku berhasil dipinjam');
     }
@@ -87,16 +98,28 @@ class AnggotaController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
-       //
-    }
+{
+    // Find the record by ID
+    $pinjamBuku = PinjamBuku::find($id);
+
+    // Update the fields
+    $pinjamBuku->tanggal_pinjam = $request->tanggal_pinjam; // Make sure this matches your input names
+    $pinjamBuku->tanggal_kembali = $request->tanggal_kembali;
+
+    // Save the updated record
+    $pinjamBuku->save();
+
+    // Redirect or return a response
+    return redirect()->route('books.history')->with('success', 'Tanggal peminjaman diperpanjang!');
+}
+
 
     /*
     *   Ubah status buku dan pinjamBuku
     */
     public function status(string $status, string $id, string $book_id)
     {
-        if(Auth::user()->role == 'admin') { $route = 'books.history'; }else{ $route = 'anggota.history';} // Jika pengguna admin, kirim ke books.history, Jika pengguna anggota, kirim ke anggota.history
+        $route = Auth::user()->role == 'admin' ? 'books.history' : 'anggota.history'; // Jika pengguna admin, kirim ke books.history, Jika pengguna anggota, kirim ke anggota.history
         if($status == 'borrowed') // Jika status "borrowed", berarti menjadi returned
         {
             $book_status = true;
@@ -121,7 +144,7 @@ class AnggotaController extends Controller
             'status'=> $pinjam_status,
         ]);
 
-        return redirect()->route('books.history')->with('success','Buku telah dikembalikan');
+        return redirect()->route($route)->with('success','Buku telah dikembalikan');
     }
 
     /**
@@ -129,6 +152,9 @@ class AnggotaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $pinjamBuku = PinjamBuku::findOrFail($id);
+        $pinjamBuku->delete();
+
+        return redirect()->route('books.history')->with('Berhasil menghapus riwayat');
     }
 }

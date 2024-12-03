@@ -2,9 +2,25 @@
     <section class="bg-gray-50 dark:bg-gray-900">
         <div class="mx-auto justify-left px-8 py-6 max-w-screen-xl">
             <h1 class="text-3xl font-bold text-center mb-8 dark:text-white">Daftar Buku Perpustakaan</h1>
+            <form action="{{ route('anggota.index') }}" method="GET" class="flex items-center max-w-md mb-8">
+                <label for="query" class="sr-only">Search</label>
+            <div class="relative w-full">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+            </svg>
+                </div>
+                    <input type="text" name="q" id="query" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Cari..." value="{{ request('search') }}">
+                </div>
+                <x-primary-button type="submit">
+                    <svg class="w-6 h-6 text-white dark:text-gray-950 rotate-45" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" d="M12 2a1 1 0 0 1 .932.638l7 18a1 1 0 0 1-1.326 1.281L13 19.517V13a1 1 0 1 0-2 0v6.517l-5.606 2.402a1 1 0 0 1-1.326-1.281l7-18A1 1 0 0 1 12 2Z" clip-rule="evenodd"/>
+                    </svg>
+                </x-primary-button>
+            </form>
             <div class="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto items-center">
                 @foreach($books as $book)
-                <button data-modal-target="{{ $book->id }}-modal" data-modal-toggle="{{ $book->id }}-modal" type="button" class=" text-left block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 transition duration-100">
+                <button data-modal-target="{{ $book->id }}-modal" data-modal-toggle="{{ $book->id }}-modal" type="button" class=" text-left block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 hover:transition hover:duration-100 w-80">
                     <img class="h-28 object-cover mx-auto" src="{{ asset('storage/'.$book->foto) }}" alt="{{ $book->judul_buku.' Cover' }}">
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white capitalize truncate">{{ $book->judul_buku }}</h5>
                     <span class="font-normal text-gray-100 px-2 py-1 rounded-full {{ $book->status ? 'bg-green-500' : 'bg-red-500' }} capitalize">{{ $book->book_status }}</span>
@@ -22,6 +38,7 @@
                                 <!-- Modal header -->
                                 <div class="flex justify-between mb-4 rounded-t sm:mb-5">
                                     <div class="text-lg text-gray-900 md:text-xl dark:text-white">
+                                        <img class="h-28 object-cover" src="{{ asset('storage/'.$book->foto) }}" alt="{{ $book->judul_buku.' Cover' }}">
                                         <h3 class="font-semibold ">
                                             {{ $book->judul_buku }}
                                         </h3>
@@ -74,7 +91,7 @@
                                             </button>
                                         </form>
                                         @else
-                                        <p class="text-center dark:text-white">
+                                        <p class="dark:text-white">
                                             Buku ini tidak tersedia!
                                         </p>
                                     @endif

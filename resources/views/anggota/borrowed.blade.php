@@ -4,9 +4,13 @@
             <h1 class="text-3xl font-bold text-center mb-8 dark:text-white">Buku Yang Anda Pinjam</h1>
             <div class="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto items-center">
                 @foreach($pinjamBukus as $pinjam)
-                    @csrf
-                    @method("PATCH")
-                    <button data-modal-target="{{ $pinjam->book->id }}-modal" data-modal-toggle="{{ $pinjam->book->id }}-modal" type="button" class=" text-left block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 transition duration-100">
+                    @php
+                        $buttonBg = now()->modify('+3 day') >= $pinjam->tanggal_kembali ? 'bg-yellow-100 border border-yellow-200 hover:bg-yellow-200 dark:bg-yellow-800 dark:border-yellow-950 dark:hover:bg-yellow-600' : 'bg-white border border-gray-200 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700';
+
+                        if(now() >= $pinjam->tanggal_kembali)
+                        {$buttonBg = 'bg-red-100 border border-red-200 hover:bg-red-200 dark:bg-red-800 dark:border-red-950 dark:hover:bg-red-600';}
+                    @endphp
+                    <button data-modal-target="{{ $pinjam->book->id }}-modal" data-modal-toggle="{{ $pinjam->book->id }}-modal" type="button" class="text-left block max-w-sm p-6 rounded-lg shadow {{ $buttonBg }} transition duration-100">
                         <img class="h-28 object-cover mx-auto" src="{{ asset('storage/'.$pinjam->book->foto) }}" alt="{{ $pinjam->book->judul_buku.' Cover' }}">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white capitalize truncate">{{ $pinjam->book->judul_buku }}</h5>
                         <p class="font-normal text-gray-700 dark:text-gray-400 capitalize truncate">Penulis: {{ $pinjam->book->penulis }}</p>
@@ -26,9 +30,6 @@
                                         <h3 class="font-semibold ">
                                             {{ $pinjam->book->judul_buku }}
                                         </h3>
-                                        <p class="font-bold">
-                                            <span class="text-gray-100 rounded-full {{ $pinjam->book->status ? 'text-green-500' : 'text-red-500' }} capitalize">{!! $pinjam->book->status ? "Tersedia &#10003;" : 'Habis &#10060;' !!}</span>
-                                        </p>
                                     </div>
                                     <div>
                                         <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 inline-flex dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="{{ $pinjam->book->id }}-modal">
@@ -49,14 +50,20 @@
 
                                     <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Jumlah Stok</dt>
                                     <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">{{ $pinjam->book->jumlah_stok }}</dd>
+
+                                    <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Tanggal Awal Pinjam</dt>
+                                    <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">{{ date('d M Y', strtotime($pinjam->tanggal_pinjam)) }}</dd>
+
+                                    <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Tanggal Pengembalian</dt>
+                                    <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">{{ date('d M Y', strtotime($pinjam->tanggal_kembali)) }}</dd>
                                 </dl>
                                 <div class="flex justify-between items-end">
                                     <form action="{{ route('anggota.status', ['status' => $pinjam->status, 'id' => $pinjam->id, 'book_id' => $pinjam->book->id]) }}" method="post">
                                         @csrf
                                         @method("PATCH")
-                                        <button type="submit" class=" text-left max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 transition duration-100">
+                                        <x-primary-button type="submit">
                                             Kembalikan
-                                        </button>
+                                        </x-primary-button>
                                     </form>
                                 </div>
                         </div>

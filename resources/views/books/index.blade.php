@@ -34,7 +34,7 @@
                     <td class="px-1 border-x-2 border-x-gray-300 dark:border-x-gray-500">{{ $book->kategori }}</td>
                     <td class="px-1 border-x-2 border-x-gray-300 dark:border-x-gray-500">{{ $book->tahun_terbit }}</td>
                     <td class="px-1 border-x-2 border-x-gray-300 dark:border-x-gray-500">{{ $book->jumlah_stok }}</td>
-                    <td class="px-1 border-x-2 border-x-gray-300 dark:border-x-gray-500 {{ $book->status ? 'text-green-500' : 'text-red-500' }}">{{ $book->status ? 'Available' : 'Unavailable' }}</td>
+                    <td class="px-1 border-x-2 border-x-gray-300 dark:border-x-gray-500 first-letter:uppercase {{ $book->status ? 'text-green-500' : 'text-red-500' }}">{{ $book->book_status }}</td>
                     <td class="px-1 border-x-2 border-x-gray-300 dark:border-x-gray-500 w-56">
                         <span class="line-clamp-3">{{ $book->deskripsi }}</span>
                     </td>
@@ -68,4 +68,15 @@
             @endforeach
         </x-slot>
     </x-table>
+    <script>
+        function validateFileSize(input) {
+            const file = input.files[0];
+            const maxSize = 4 * 1024 * 1024; // 2MB in bytes
+
+            if (file && file.size > maxSize) {
+                alert('File Foto Terlalu Berat. Tolong gunakan file dibawah 4MB.');
+                input.value = ''; // Clear the file input
+            }
+        }
+    </script>
 </x-app-layout>

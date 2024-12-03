@@ -14,6 +14,10 @@
         </x-slot>
         <x-slot name="tbody">
             @forelse ($pinjamBukus as $pinjam)
+                @php
+                $deadline = now()->modify('+3 day') >= $pinjam->tanggal_kembali ? 'text-yellow-500' : '';
+                if(now() >= $pinjam->tanggal_kembali){$deadline = 'text-red-500';}
+                @endphp
                 <tr class="
                 @if ($loop->iteration % 2 == 0)
                     bg-gray-200 dark:bg-gray-700
@@ -23,8 +27,8 @@
                     <td class="px-1 border-x-2 border-x-gray-300 dark:border-x-gray-500">{{ $pinjam->book->judul_buku }}</td>
                     <td class="px-1 border-x-2 border-x-gray-300 dark:border-x-gray-500">{{ $pinjam->book->penulis }}</td>
                     <td class="px-1 border-x-2 border-x-gray-300 dark:border-x-gray-500">{{ $pinjam->user->name }}</td>
-                    <td class="px-1 border-x-2 border-x-gray-300 dark:border-x-gray-500">{{ $pinjam->tanggal_pinjam }}</td>
-                    <td class="px-1 border-x-2 border-x-gray-300 dark:border-x-gray-500">{{ $pinjam->tanggal_kembali }}</td>
+                    <td class="px-1 border-x-2 border-x-gray-300 dark:border-x-gray-500">{{ date('d M Y', strtotime($pinjam->tanggal_pinjam)) }}</td>
+                    <td class="px-1 border-x-2 border-x-gray-300 dark:border-x-gray-500 {{ $deadline }}">{{ date('d M Y', strtotime($pinjam->tanggal_kembali)) }}</td>
                     <td class="px-1 border-x-2 border-x-gray-300 dark:border-x-gray-500 text-white">
                         <p class="{{ ($pinjam->status === 'borrowed' ? 'bg-yellow-500' : 'bg-green-500') }} px-2 py-1.5 rounded-3xl text-center inline-block">{{ $pinjam->status }}</p>
                     </td>

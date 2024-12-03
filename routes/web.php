@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('history', [BookController::class,'history'])->name('books.history');
+    Route::resource('anggota', AnggotaController::class)->only('update', 'destroy');
 
     Route::resource('books', BookController::class);
     Route::resource('users', UserController::class);

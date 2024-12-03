@@ -1,9 +1,8 @@
-
-<button class="2xl:hidden top-2 left-2 bg-gray-200 bg-opacity-40 hover:bg-opacity-80 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-1.5 py-1.5 dark:white-700 focus:outline-none fixed z-30 transform transition-transform active:rotate-90" type="button" data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation" aria-controls="drawer-navigation">
-    <svg viewBox="0 0 100 80" width="40" height="40">
-        <rect width="100" height="20" rx="8"></rect>
-        <rect y="30" width="100" height="20" rx="8"></rect>
-        <rect y="60" width="100" height="20" rx="8"></rect>
+<button class="2xl:hidden top-2 left-2 focus:ring-4 focus:ring-blue-300 hover:opacity-60 font-medium text-sm px-1.5 py-1.5 dark:white-700 focus:outline-none fixed z-30" type="button" data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation" aria-controls="drawer-navigation">
+    <svg class="text-gray-400 dark:text-gray-700" viewBox="0 0 100 80" width="40" height="40">
+        <rect width="100" height="20" rx="8" class="fill-current"></rect>
+        <rect y="30" width="100" height="20" rx="8" class="fill-current"></rect>
+        <rect y="60" width="100" height="20" rx="8" class="fill-current"></rect>
     </svg>
 </button>
 

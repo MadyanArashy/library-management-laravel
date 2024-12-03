@@ -33,20 +33,28 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            "judul_buku" => "required|string",
-            "penulis" => "required|string",
-            "kategori" => "required|string",
-            "tahun_terbit" => "required|integer",
-            "jumlah_stok" => "required|integer",
-            "deskripsi" => "required|string",
-            "status" => "required|boolean",
-            "foto"=> "image|mimes:jpeg,jpg,png,svg,webp|max:2048",
-        ]);
+        // dd($request->all());
+
+        try {
+            $request->validate([
+                "judul_buku" => "required|string",
+                "penulis" => "required|string",
+                "kategori" => "required|string",
+                "tahun_terbit" => "required|integer",
+                "jumlah_stok" => "required|integer",
+                "deskripsi" => "required|string",
+                "status" => "required|boolean",
+                "foto"=> "image|mimes:jpeg,jpg,png,svg,webp",
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // dd($e->errors());
+            return redirect()->route('books.index')->with("error", "Kesalahan validasi data");
+        }
 
         // dd($request->all());
         $image = $request->file('foto')->store('books', 'public');
 
+        $book_status = $request->status ? 'available' : 'unavailable';
         Book::create([
             "judul_buku" => $request->judul_buku,
             "penulis" => $request->penulis,
@@ -55,6 +63,7 @@ class BookController extends Controller
             "jumlah_stok" => $request->jumlah_stok,
             "deskripsi" => $request->deskripsi,
             "status" => $request->status,
+            "book_status" => $book_status,
             "foto"=> $image,
         ]);
 
@@ -91,7 +100,9 @@ class BookController extends Controller
     public function update(Request $request, Book $book)
     {
         $book->update($request->all());
-        return redirect(route("books.edit", $book->id))->with("success","Buku telah berhasil di update!");
+        $book_status = $request->status ? 'available' : 'unavailable';
+        $book->update(["book_status" => $book_status]);
+        return redirect(route("books.index", $book->id))->with("success","Buku telah berhasil di update!");
     }
 
     /**

@@ -13,7 +13,7 @@ class Book extends Model
         'tahun_terbit',
         'jumlah_stok',
         'status',
-        'loan_status',
+        'book_status',
         'deskripsi',
         'foto',
     ];
